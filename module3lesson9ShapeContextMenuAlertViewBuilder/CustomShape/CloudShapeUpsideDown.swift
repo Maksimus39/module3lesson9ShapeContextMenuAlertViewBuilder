@@ -12,9 +12,8 @@ struct CloudShapeUpsideDown: Shape {
         let dx = (rect.width - svgWidth * scale) / 2
         let dy = (rect.height - svgHeight * scale) / 2
         
-        // 🔄 Функция преобразования координат с ВЕРТИКАЛЬНЫМ ОТРАЖЕНИЕМ
         func p(_ x: CGFloat, _ y: CGFloat) -> CGPoint {
-            let flippedY = svgHeight - y  // ← ключевое изменение: инвертируем Y
+            let flippedY = svgHeight - y  
             return CGPoint(x: x * scale + dx, y: flippedY * scale + dy)
         }
         
@@ -25,9 +24,7 @@ struct CloudShapeUpsideDown: Shape {
         func qp(_ cx: CGFloat, _ cy: CGFloat, _ x: CGFloat, _ y: CGFloat) {
             path.addQuadCurve(to: p(x, y), control: p(cx, cy))
         }
-        
-        // === ВСЕ КООРДИНАТЫ ОСТАЛИСЬ КАК В ОРИГИНАЛЕ ===
-        // Отражение происходит автоматически в функции p()
+
         
         path.move(to: p(2, 25.5))
         
